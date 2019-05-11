@@ -1,7 +1,7 @@
 # C language
 
 # Tools: 
-STRC51 board
+- STRC51 board
 Tera Term: https://osdn.net/projects/ttssh2/releases/
 SDCC compiler: http://sdcc.sourceforge.net/
 

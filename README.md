@@ -2,19 +2,19 @@
 
 # Tools: 
 - STRC51 board
-Tera Term: https://osdn.net/projects/ttssh2/releases/
-SDCC compiler: http://sdcc.sourceforge.net/
+- Tera Term: https://osdn.net/projects/ttssh2/releases/
+- SDCC compiler: http://sdcc.sourceforge.net/
 
 ---
 
 # Tera Term: Serial port setup
-Port: COM1
-Baud rate: 19200
-Data: 8 bit
-Parity: none
-Stop: 1 bit
-Flow control: none
-Transmit delay: 0 msec/char && 20 msec/line
+- Port: COM1
+- Baud rate: 19200
+- Data: 8 bit
+- Parity: none
+- Stop: 1 bit
+- Flow control: none
+- Transmit delay: 0 msec/char && 20 msec/line
 
 ---
 

@@ -29,6 +29,6 @@ and the result of these operations will be sent to the PC in the HEX format. Ass
 1. Run Tera Term
 2. Reset the board 
 3. Run compile.bat
-4. ``` q ```
-5. ``` alt+v ```
+4. ``` q ``` + ```Enter```
+5. ``` alt+v ```+ ```Enter```
 6. Set the values of HEX, DEC & OCT (Read the task)

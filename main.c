@@ -1,20 +1,24 @@
 #include <8051.h>
 
+
+///Pobieranie znakow z terminalu
 char getchar() {
     char znak;
-    while(RI == 0);
+    while(RI == 0);  ///Wskaznik przerwania – zapelnienia sie bufora odbiorczego
 	RI = 0;
-    znak = SBUF;
+    znak = SBUF; ///Bufor
 
     return znak;
 }
 
+///wysyla znak na standardowe wyjscie
 void putchar(char znak) {
     SBUF = znak;
-    while(TI==0);
+    while(TI==0); ///Wskaznik przerwania – oproznienia bufora nadawczego
     TI=0;
 }
 
+///Podniesienie do potegi
 int power(int n, int p){
     int i;
 
@@ -27,6 +31,7 @@ int power(int n, int p){
     return n;
 }
 
+///Konwersja HEX (Cyfry 0-9; litery A-F)
 int hex_to_int(char hex[], int size){
     int result = 0;
     int i;
@@ -47,6 +52,7 @@ int hex_to_int(char hex[], int size){
     return result;
 }
 
+///Konwersja Octal (Do zapisu liczb uzywa sie w nim osmiu cyfr, od 0 do 7)
 int oct_to_int(char oct[], int size){
     int result = 0;
     int i;
@@ -64,6 +70,7 @@ int oct_to_int(char oct[], int size){
     return result;
 }
 
+///Konwersja Decimal (Cyfry 0-10)
 int dec_to_int(char dec[], int size){
     int result = 0;
     int i;
@@ -81,6 +88,7 @@ int dec_to_int(char dec[], int size){
     return result;
 }
 
+///Wypisywanie tablicy w terminale
 void print_the_stuff(int number){
     int i = 0;
     char array[] = {'\0','\0','\0','\0'};
@@ -88,6 +96,7 @@ void print_the_stuff(int number){
 
     if (number == 0) putchar('0');
 
+    //W postaci znaku
     while(number > 0){
         c = ( number % 10 ) + '0';
         array[i] = c;
@@ -101,6 +110,8 @@ void print_the_stuff(int number){
     putchar('\n');
 }
 
+
+///Wypelnienie tablicy liczbami przekonwertowanymi zgodnie z trescia zadania
 void do_the_stuff(){
     int i, j = 0;
     int num1;
@@ -120,6 +131,7 @@ void do_the_stuff(){
         ++j;
     }
 
+    ///arg1 to HEX
     num1 = hex_to_int(number, j);
 	//////////////////////
 	//print_the_stuff(num1);
@@ -136,8 +148,9 @@ void do_the_stuff(){
         ++j;
     }
 
+    ///arg2 to Decimal
     num2 = dec_to_int(number, j);
-		//////////////////////
+	//////////////////////
 	//print_the_stuff(num2);
 	//////////////////////
 	putchar(' ');
@@ -152,30 +165,34 @@ void do_the_stuff(){
         ++j;
     }
 
+    ///arg3 to Octal
     num3 = oct_to_int(number, j);
-		//////////////////////
+	//////////////////////
 	//print_the_stuff(num3);
 	//////////////////////
 	putchar('\n');
     j = 0;
 	// 256 / 2 | 2 = 128 | 2 = 128
+
+	///arg1 / arg2 OR arg3
     result = num1 / num2;
 	result |= num3;
     print_the_stuff(result);
 }
 
 void main(void){
-    SCON = 0x50;
-    TMOD &=	0x0F;
+    SCON = 0x50; ///ustawiamy tryb transmisji lacza
+    TMOD &=	0x0F; ///ustawienie licznika w tryb samo przeladowywania
     TMOD |=	0x20;
-    TH1 = TL1 = 253;
-    TCON =	0x40;
-    PCON = 0x80;
+    TH1 = TL1 = 253; /// ustalenie – wpisanie predkosci transmisji
+    TCON =	0x40; /// ustawienie trybu pracy licznika
+    PCON = 0x80; ///ustawienie bitu SMOD
 
 	//print_the_stuff(1234);
 	//for(;;){
 	//	putchar(getchar());
 	//}
+	///Uruchomienie glownej funkcji
     while(1){
        do_the_stuff();
     }
